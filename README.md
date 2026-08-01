@@ -35,7 +35,7 @@ El sistema automatiza la generación de **posts para LinkedIn** sobre operacione
 ```
 ecosistema-ia-automation/
 ├── README.md                              # Este archivo
-├── Proyecto_Final_Coder.json              # Workflow exportado de n8n (10 nodos)
+├── Proyecto_Final_Coder (1).json              # Workflow exportado de n8n (10 nodos)
 ├── EntregaFinal_Ecosistema_IA_v2.pdf      # Documentación completa (5 criterios)
 └── screenshots/
     ├── 01_flujo_completo_n8n.png          # Workflow activo con todos los nodos
@@ -156,7 +156,7 @@ IF: data.approved = true
 
 ### Instalación
 
-1. Importá `Proyecto_Final_Coder.json` en n8n
+1. Importá `Proyecto_Final_Coder (1).json` en n8n
 2. Configurá las credenciales:
    - Airtable Personal Access Token
    - Groq API Key (gratuita en console.groq.com)
@@ -183,4 +183,4 @@ Ver `EntregaFinal_Ecosistema_IA_v2.pdf` para los 5 criterios de evaluación:
 
 ---
 
-*Desarrollado como proyecto final del curso IA Automation — Coderhouse 2025*
+*Desarrollado como proyecto final del curso IA Automation — Coderhouse 2026*
