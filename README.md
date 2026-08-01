@@ -1,6 +1,6 @@
 # 🤖 Ecosistema de Automatización IA Autónomo
 
-**Proyecto Final — Curso IA Automation | Coderhouse 2025**
+**Proyecto Final — Curso IA Automation | Coderhouse 2026**
 
 Pipeline de generación de contenido LinkedIn con base de conocimientos RAG, validación humana (HITL) y control de calidad automatizado.
 
