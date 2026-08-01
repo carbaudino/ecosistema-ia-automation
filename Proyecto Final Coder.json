@@ -1,0 +1,905 @@
+{
+  "name": "Proyecto Final Coder",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "value": 5,
+              "unit": "minutes"
+            }
+          ]
+        },
+        "authentication": "airtableTokenApi",
+        "baseId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "appfj3aaPcP99qmEB"
+        },
+        "tableId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "tblkOfUVLrDL5VGcZ"
+        },
+        "triggerField": "Última modificación por",
+        "additionalFields": {}
+      },
+      "id": "b43af123-d686-44bf-a926-796a410b0481",
+      "name": "Airtable Trigger",
+      "type": "n8n-nodes-base.airtableTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1536,
+        112
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "XCdJp6EelaXflKdf",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appfj3aaPcP99qmEB",
+          "mode": "list",
+          "cachedResultName": "Pipeline HITL LinkedIn",
+          "cachedResultUrl": "https://airtable.com/appfj3aaPcP99qmEB"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblMCd2DtWAcY6hJU",
+          "mode": "list",
+          "cachedResultName": "Directrices RAG",
+          "cachedResultUrl": "https://airtable.com/appfj3aaPcP99qmEB/tblMCd2DtWAcY6hJU"
+        },
+        "options": {}
+      },
+      "id": "761cdc68-1723-44e6-b895-456aa60ff3ea",
+      "name": "Buscar directrices RAG",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        -1328,
+        112
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "XCdJp6EelaXflKdf",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appfj3aaPcP99qmEB",
+          "mode": "list",
+          "cachedResultName": "Pipeline HITL LinkedIn",
+          "cachedResultUrl": "https://airtable.com/appfj3aaPcP99qmEB"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblkOfUVLrDL5VGcZ",
+          "mode": "list",
+          "cachedResultName": "Contenido",
+          "cachedResultUrl": "https://airtable.com/appfj3aaPcP99qmEB/tblkOfUVLrDL5VGcZ"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Borrador": "={{ $('Basic LLM Chain').item.json.text }}",
+            "Estado": "En revisión",
+            "id": "={{ $('Airtable Trigger').item.json.id }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Idea Semilla",
+              "displayName": "Idea Semilla",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Pendiente",
+                  "value": "Pendiente"
+                },
+                {
+                  "name": "Generando",
+                  "value": "Generando"
+                },
+                {
+                  "name": "En revisión",
+                  "value": "En revisión"
+                },
+                {
+                  "name": "Publicado",
+                  "value": "Publicado"
+                },
+                {
+                  "name": "Rechazado",
+                  "value": "Rechazado"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Borrador",
+              "displayName": "Borrador",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Aprobado",
+              "displayName": "Aprobado",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Feedback",
+              "displayName": "Feedback",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "URL Publicado",
+              "displayName": "URL Publicado",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "c51aacbf-3483-47c0-9b7d-b051a2a3b8c6",
+      "name": "Guardar borrador en Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        -768,
+        -64
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "XCdJp6EelaXflKdf",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "condition-aprobado",
+              "leftValue": "={{ $json.data.approved }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "88dc80ab-9668-4b56-825f-9587122ec0d8",
+      "name": "IF: Aprobado = true",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -384,
+        -64
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appfj3aaPcP99qmEB",
+          "mode": "list",
+          "cachedResultName": "Pipeline HITL LinkedIn",
+          "cachedResultUrl": "https://airtable.com/appfj3aaPcP99qmEB"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblkOfUVLrDL5VGcZ",
+          "mode": "list",
+          "cachedResultName": "Contenido",
+          "cachedResultUrl": "https://airtable.com/appfj3aaPcP99qmEB/tblkOfUVLrDL5VGcZ"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Aprobado": false,
+            "id": "={{ $('Airtable Trigger').item.json.id }}",
+            "Estado": "Publicado"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Idea Semilla",
+              "displayName": "Idea Semilla",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Pendiente",
+                  "value": "Pendiente"
+                },
+                {
+                  "name": "Generando",
+                  "value": "Generando"
+                },
+                {
+                  "name": "En revisión",
+                  "value": "En revisión"
+                },
+                {
+                  "name": "Publicado",
+                  "value": "Publicado"
+                },
+                {
+                  "name": "Rechazado",
+                  "value": "Rechazado"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Borrador",
+              "displayName": "Borrador",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Aprobado",
+              "displayName": "Aprobado",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Feedback",
+              "displayName": "Feedback",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "URL Publicado",
+              "displayName": "URL Publicado",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "f38ebac6-1d89-4f50-88f9-f3f858201b3c",
+      "name": "Airtable - Marcar Publicado",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        -144,
+        0
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "XCdJp6EelaXflKdf",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appfj3aaPcP99qmEB",
+          "mode": "list",
+          "cachedResultName": "Pipeline HITL LinkedIn",
+          "cachedResultUrl": "https://airtable.com/appfj3aaPcP99qmEB"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblkOfUVLrDL5VGcZ",
+          "mode": "list",
+          "cachedResultName": "Contenido",
+          "cachedResultUrl": "https://airtable.com/appfj3aaPcP99qmEB/tblkOfUVLrDL5VGcZ"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Aprobado": false,
+            "id": "={{ $('Airtable Trigger').item.json.id }}",
+            "Estado": "Rechazado"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Idea Semilla",
+              "displayName": "Idea Semilla",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Pendiente",
+                  "value": "Pendiente"
+                },
+                {
+                  "name": "Generando",
+                  "value": "Generando"
+                },
+                {
+                  "name": "En revisión",
+                  "value": "En revisión"
+                },
+                {
+                  "name": "Publicado",
+                  "value": "Publicado"
+                },
+                {
+                  "name": "Rechazado",
+                  "value": "Rechazado"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Borrador",
+              "displayName": "Borrador",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Aprobado",
+              "displayName": "Aprobado",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Feedback",
+              "displayName": "Feedback",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "URL Publicado",
+              "displayName": "URL Publicado",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "a6581ae2-9451-4aab-9d85-3bf0757828c5",
+      "name": "Airtable - Marcar Rechazado",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        -144,
+        224
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "XCdJp6EelaXflKdf",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "fromEmail": "car.baudino@gmail.com",
+        "toEmail": "car.baudino@gmail.com",
+        "subject": "=[Revision pendiente] Nuevo borrador: {{ $('Airtable Trigger').item.json.fields['Idea Semilla'] }}",
+        "message": "=Hola Carla,\n\nEl pipeline genero un nuevo borrador de post para LinkedIn.\n\nIDEA SEMILLA: {{ $('Airtable Trigger').item.json.fields['Idea Semilla'] }}\n\n--- BORRADOR ---\n\n{{ $('Basic LLM Chain').item.json.text }}\n--- FIN DEL BORRADOR ---\n\nUsa los botones de abajo para aprobar o rechazar.",
+        "approvalOptions": {
+          "values": {
+            "approvalType": "double",
+            "approveLabel": "Aprobar",
+            "disapproveLabel": "Rechazar"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        -576,
+        -64
+      ],
+      "id": "72525a45-8486-432f-9f02-31602a439f28",
+      "name": "Send message and wait for response - HITL",
+      "webhookId": "fb15bf55-abe8-43ae-a182-7401eea7a55e",
+      "credentials": {
+        "smtp": {
+          "id": "OWzYkC7rlUbeu8EO",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Actuas como redactor de contenido senior especializado en operaciones y logistica. Usa EXCLUSIVAMENTE estas directrices de marca:\n\n{{ $('Buscar directrices RAG').all().map(r => r.json.fields.Contenido).join('\\n\\n') }}\n\nRedacta un post de LinkedIn sobre el siguiente tema:\n\nIDEA SEMILLA: {{ $('Airtable Trigger').item.json.fields['Idea Semilla'] }}\n\nEstructura obligatoria:\n1. Hook inicial impactante (1 oracion)\n2. Desarrollo con 3-5 puntos clave (bullets con emoji)\n3. Cierre con pregunta o llamada a la accion\n4. 3-5 hashtags relevantes\n\nLongitud: entre 150 y 300 palabras.",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        -1168,
+        112
+      ],
+      "id": "d2677a90-2377-4c1b-9345-f384cd838f90",
+      "name": "Basic LLM Chain",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "model": "llama-3.1-8b-instant",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        -1184,
+        304
+      ],
+      "id": "987f68e8-a776-40b6-9b32-36b01c82f4d5",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "MHA9d0DnIvqS1WG2",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appfj3aaPcP99qmEB",
+          "mode": "list",
+          "cachedResultName": "Pipeline HITL LinkedIn",
+          "cachedResultUrl": "https://airtable.com/appfj3aaPcP99qmEB"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblkOfUVLrDL5VGcZ",
+          "mode": "list",
+          "cachedResultName": "Contenido",
+          "cachedResultUrl": "https://airtable.com/appfj3aaPcP99qmEB/tblkOfUVLrDL5VGcZ"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Aprobado": false,
+            "id": "={{ $('Airtable Trigger').item.json.id }}",
+            "Borrador": "=\t{{ $json.error.message }}",
+            "Estado": "Error"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Idea Semilla",
+              "displayName": "Idea Semilla",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Pendiente",
+                  "value": "Pendiente"
+                },
+                {
+                  "name": "Generando",
+                  "value": "Generando"
+                },
+                {
+                  "name": "En revisión",
+                  "value": "En revisión"
+                },
+                {
+                  "name": "Publicado",
+                  "value": "Publicado"
+                },
+                {
+                  "name": "Rechazado",
+                  "value": "Rechazado"
+                },
+                {
+                  "name": "Error",
+                  "value": "Error"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Borrador",
+              "displayName": "Borrador",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Aprobado",
+              "displayName": "Aprobado",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Feedback",
+              "displayName": "Feedback",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "URL Publicado",
+              "displayName": "URL Publicado",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Última modificación por",
+              "displayName": "Última modificación por",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Error Log",
+              "displayName": "Error Log",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        -784,
+        208
+      ],
+      "id": "bd1bb72a-9fda-46ef-a930-ab69dac530bc",
+      "name": "Error Handler",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "XCdJp6EelaXflKdf",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Airtable Trigger": {
+      "main": [
+        [
+          {
+            "node": "Buscar directrices RAG",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar directrices RAG": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardar borrador en Airtable": {
+      "main": [
+        [
+          {
+            "node": "Send message and wait for response - HITL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF: Aprobado = true": {
+      "main": [
+        [
+          {
+            "node": "Airtable - Marcar Publicado",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Airtable - Marcar Rechazado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send message and wait for response - HITL": {
+      "main": [
+        [
+          {
+            "node": "IF: Aprobado = true",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Guardar borrador en Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Error Handler",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "adbc4fe0-eb6a-49b2-b786-13402f95ef1b",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "dc2317752fbeddd55700868013184d4e2c916e631002583d26a364857d065037"
+  },
+  "nodeGroups": [],
+  "id": "28rCbFghiDNvWeFp",
+  "tags": []
+}
