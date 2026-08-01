@@ -183,4 +183,10 @@ Ver `EntregaFinal_Ecosistema_IA_v2.pdf` para los 5 criterios de evaluación:
 
 ---
 
+## 🎥 Video demo
+
+[Ver demo del pipeline en funcionamiento](https://drive.google.com/file/d/1uBTeVF2rKJIaw_CP03vf7AFQtggJMaUO/view?usp=sharing)
+
+---
+
 *Desarrollado como proyecto final del curso IA Automation — Coderhouse 2026*
