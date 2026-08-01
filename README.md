@@ -50,8 +50,8 @@ ecosistema-ia-automation/
 
 | Recurso | Link |
 |---|---|
-| 📊 Dashboard de Control (Airtable) | **[https://airtable.com/appfj3aaPcP99qmEB/shrRw0NsPSaKQTZ2O]** |
-| 🗄️ Base de datos (modo lectura) | **[https://airtable.com/appfj3aaPcP99qmEB/shrbqn70GkMD7IOcS]** |
+| 📊 Dashboard de Control (Airtable) | [Ver Dashboard](https://airtable.com/appfj3aaPcP99qmEB/shrRw0NsPSaKQTZ2O) |
+| 🗄️ Base de datos (modo lectura) | [Ver Base de datos](https://airtable.com/appfj3aaPcP99qmEB/shrbqn70GkMD7IOcS) |
 | 📄 Documentación PDF | Ver `EntregaFinal_Ecosistema_IA.pdf` en este repo |
 
 ---
