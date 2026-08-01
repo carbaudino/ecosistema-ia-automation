@@ -1,6 +1,6 @@
 # 🤖 Ecosistema de Automatización IA Autónomo
 
-**Proyecto Final — Curso IA Automation | Coderhouse 2025**
+**Proyecto Final — Curso IA Automation | Coderhouse 2026**
 
 Pipeline de generación de contenido LinkedIn con base de conocimientos RAG, validación humana (HITL) y control de calidad automatizado.
 
@@ -36,7 +36,7 @@ El sistema automatiza la generación de **posts para LinkedIn** sobre operacione
 ecosistema-ia-automation/
 ├── README.md                          # Este archivo
 ├── workflow_pipeline_hitl.json        # Workflow exportado de n8n
-├── EntregaFinal_Ecosistema_IA.pdf     # Documentación completa (5 criterios)
+├── EntregaFinal_Ecosistema_IA_v2.pdf    # Documentación completa (5 criterios)
 └── screenshots/
     ├── 01_flujo_completo_n8n.png      # Workflow activo en n8n
     ├── 02_airtable_contenido.png      # Tabla de comandos con todos los estados
@@ -59,13 +59,17 @@ ecosistema-ia-automation/
 ## 🧠 Arquitectura del pipeline
 
 ```
-Airtable Trigger (Estado='Generando')
+Airtable Trigger (Estado='Generando' AND Procesado=FALSE)
         ↓
 Buscar directrices RAG (6 registros atómicos)
         ↓
 Groq LLaMA 3.1 — Basic LLM Chain ──→ [Error] → Error Handler → Airtable (Estado=Error)
         ↓ [Success]
+Edit Fields (Execute Once) — consolida output en 1 item
+        ↓
 Airtable — Guardar borrador (Estado=En revisión)
+        ↓
+Update record — Procesado = true
         ↓
 Gmail SMTP — Send & Wait (HITL) ← PUNTO DE PAUSA HUMANA
         ↓
@@ -149,18 +153,23 @@ IF: data.approved = true
 - Cuenta de Gmail con App Password configurada
 
 ### Instalación
-1. Importá `workflow_pipeline_hitl.json` en n8n
-2. Configurá las credenciales: Airtable Personal Access Token + Groq API Key + Gmail SMTP
-3. Reemplazá los IDs de Airtable en los nodos (Base ID + Table ID)
+1. Importá `Proyecto_Final_Coder (1).json` en n8n
+2. Configurá las credenciales:
+   - Airtable Personal Access Token
+   - Groq API Key (gratuita en console.groq.com)
+   - Gmail SMTP con App Password de Google
+3. En Airtable creá dos tablas:
+   - **Contenido** con los campos: Idea Semilla, Estado, Borrador, Procesado, Feedback, URL Publicado, Error Log, Ultima modificacion
+   - **Directrices RAG** con los campos: Tema, Contenido, Tipo
 4. Cargá los 6 registros RAG en la tabla Directrices RAG
-5. Publicá el workflow en n8n
-6. Cargá una Idea Semilla en Airtable con Estado = Generando para probar
-
+5. Reemplazá los IDs de Airtable en los nodos (Base ID + Table ID)
+6. Publicá y activá el workflow en n8n
+7. En Airtable cargá una fila nueva con Estado = `Generando` y `Procesado` sin tildar para probar
 ---
 
 ## 📁 Documentación completa
 
-Ver `EntregaFinal_Ecosistema_IA.pdf` para los 5 criterios de evaluación:
+Ver `EntregaFinal_Ecosistema_IA_v2.pdf` para los 5 criterios de evaluación:
 - Criterio 1: Mapa de arquitectura
 - Criterio 2: Estructuras de datos documentadas
 - Criterio 3: Optimización de costos
